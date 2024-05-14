@@ -1,0 +1,74 @@
+{
+  "name": "vue-autotooltip",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "types",
+    "client.d.ts"
+  ],
+  "main": "./dist/vue-autotooltip.cjs",
+  "module": "./dist/vue-autotooltip.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-autotooltip.js",
+      "require": "./dist/vue-autotooltip.cjs"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "author": {
+    "name": "elenh",
+    "email": "yisiwings@163.com"
+  },
+  "keywords": [
+    "vue",
+    "tooltip",
+    "floating-ui",
+    "directive",
+    "component"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "release:legacy": "npm run build-only && changelogen --release && npm publish --access=public --tag=legacy && git push --follow-tags",
+    "release": "npm run build-only && changelogen --release && npm publish --access=public && git push --follow-tags",
+    "build:app": "cross-env BUILD_TYPE=app vite build",
+    "build:lib": "cross-env BUILD_TYPE=lib vite build"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.8.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/jsdom": "^21.1.6",
+    "@types/node": "^20.12.5",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vitejs/plugin-vue2": "^2.3.1",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/test-utils": "^2.4.5",
+    "@vue/tsconfig": "^0.5.1",
+    "changelogen": "^0.5.5",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "jsdom": "^24.0.0",
+    "npm-run-all2": "^6.1.2",
+    "prettier": "^3.2.5",
+    "sass": "^1.77.1",
+    "typescript": "~5.4.0",
+    "vite": "^5.2.8",
+    "vitest": "^1.4.0",
+    "vue": "^2.7.16",
+    "vue-tsc": "^2.0.11"
+  },
+  "peerDependencies": {
+    "vue": "^2.7.14"
+  }
+}
