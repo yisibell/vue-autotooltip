@@ -1,6 +1,7 @@
 {
   "name": "vue-autotooltip",
   "version": "1.0.1",
+  "description": "Auto tooltip for Vue.js",
   "type": "module",
   "files": [
     "dist",
@@ -37,8 +38,8 @@
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "release:legacy": "npm run build-only && changelogen --release && npm publish --access=public --tag=legacy && git push --follow-tags",
-    "release": "npm run build-only && changelogen --release && npm publish --access=public && git push --follow-tags",
+    "release:legacy": "npm run build:lib && changelogen --release && npm publish --access=public --tag=legacy && git push --follow-tags",
+    "release": "npm run build:lib && changelogen --release && npm publish --access=public && git push --follow-tags",
     "build:app": "cross-env BUILD_TYPE=app vite build",
     "build:lib": "cross-env BUILD_TYPE=lib vite build"
   },
