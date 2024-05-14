@@ -1,5 +1,6 @@
-import type { ObjectDirective } from 'vue'
+import type { ObjectDirective, DirectiveBinding } from 'vue'
 import { computePosition, offset, flip, shift, arrow } from '@floating-ui/dom'
+import type { TooltipBindingValue, TooltipReferenceElement } from '@/lib/interfaces/core'
 
 function updatePosition(ref: HTMLElement, tooltip: HTMLElement, arrowElement?: HTMLElement | null) {
   const middleware = [offset(6), flip(), shift({ padding: 5 })]
@@ -63,19 +64,11 @@ const createTooltipElement = (content: string) => {
   return wrapper
 }
 
-interface TooltipReferenceElement extends HTMLElement {
-  _tooltipEl?: HTMLElement
-  _tooltipArrowEl?: HTMLElement | null
-  _showTooltipListener?: EventListener
-  _hideTooltipListener?: EventListener
-  _init?: (el: TooltipReferenceElement) => void
-}
-
-export const Autotooltip: ObjectDirective<TooltipReferenceElement> = {
+export const Autotooltip: ObjectDirective<TooltipReferenceElement, TooltipBindingValue> = {
   bind(el) {
-    el._init = (el) => {
+    el._init = (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => {
       const targetParent = el.parentElement || document.body
-      const content = el.innerText
+      const content = binding.value?.content || el.innerText
 
       if (!el?._tooltipEl) {
         const tooltipEl = createTooltipElement(content)
@@ -99,11 +92,12 @@ export const Autotooltip: ObjectDirective<TooltipReferenceElement> = {
       el.addEventListener('mouseenter', el._showTooltipListener)
       el.addEventListener('mouseout', el._hideTooltipListener)
     }
-
-    el._init(el)
   },
-  update(el) {
-    el._init && el._init(el)
+  inserted(el, binding) {
+    el._init && el._init(el, binding)
+  },
+  update(el, binding) {
+    el._init && el._init(el, binding)
   },
   unbind(el) {
     el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
