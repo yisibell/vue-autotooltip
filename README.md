@@ -16,6 +16,11 @@ Auto tooltip for Vue.js
 
 - `Autotooltip` directive.
 
+| Version | Support Vue Version | Status |
+| :-----: | :-----------------: | :----: |
+| `v1.x`  |      `v2.7.x`       |   ✔️   |
+|   `-`   |      `v3.2.x`       |   🚧   |
+
 # Installation
 
 ```bash

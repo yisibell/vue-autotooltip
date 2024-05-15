@@ -21,20 +21,22 @@ export default defineConfig({
       '@@': fileURLToPath(new URL('./', import.meta.url))
     }
   },
-  build: {
-    outDir,
-    target: 'es2015',
-    lib: {
-      // Could also be a dictionary or array of multiple entry points
-      entry: resolve(__dirname, 'src/lib/main.ts'),
-      name: 'VueAutotooltip',
-      // the proper extensions will be added
-      fileName: 'vue-autotooltip',
-      formats: ['es', 'cjs']
-    },
-    rollupOptions: {
-      external: ['vue', '@floating-ui/dom']
-    },
-    copyPublicDir: false
-  }
+  build: isBuildLib()
+    ? {
+        outDir,
+        target: 'es2015',
+        lib: {
+          // Could also be a dictionary or array of multiple entry points
+          entry: resolve(__dirname, 'src/lib/main.ts'),
+          name: 'VueAutotooltip',
+          // the proper extensions will be added
+          fileName: 'vue-autotooltip',
+          formats: ['es', 'cjs']
+        },
+        rollupOptions: {
+          external: ['vue', '@floating-ui/dom']
+        },
+        copyPublicDir: false
+      }
+    : { outDir }
 })
