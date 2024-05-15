@@ -1,8 +1,11 @@
 import type { DirectiveBinding } from 'vue'
 
-export interface TooltipBindingValue {
+export interface TooltipOptions {
   content?: string
+  effect?: 'dark' | 'light'
 }
+
+export type TooltipBindingValue = string | TooltipOptions | undefined
 
 export interface TooltipReferenceElement extends HTMLElement {
   _tooltipEl?: HTMLElement

@@ -1,23 +1,51 @@
 .autotooltip-wrapper {
+  --autotooltip-theme-bg-color--dark: #303133;
+  --autotooltip-theme-bg-color--light: #fff;
+  --autotooltip-theme-color--dark: #fff;
+  --autotooltip-theme-color--light: #303133;
+  --autotooltip-theme-border--light: 1px solid #303133;
+
   display: none;
   width: max-content;
   position: absolute;
   top: 0;
   left: 0;
-  background: #222;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
+  padding: 10px;
   border-radius: 4px;
-  font-size: 90%;
+  font-size: 12px;
+  line-height: 1.2;
+
+  &.is-dark {
+    background: var(--autotooltip-theme-bg-color--dark);
+    color: var(--autotooltip-theme-color--dark);
+  }
+
+  &.is-light {
+    background: var(--autotooltip-theme-bg-color--light);
+    color: var(--autotooltip-theme-color--light);
+    border: var(--autotooltip-theme-border--light);
+  }
+
+  .autotooltip {
+    &__arrow {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      transform: rotate(45deg);
+
+      &.is-dark {
+        background: var(--autotooltip-theme-bg-color--dark);
+      }
+
+      &.is-light {
+        background: var(--autotooltip-theme-bg-color--light);
+      }
+    }
+  }
 }
 
-.autotooltip {
-  &__arrow {
-    position: absolute;
-    background: #222;
-    width: 8px;
-    height: 8px;
-    transform: rotate(45deg);
-  }
+.autotooltip--text-truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
