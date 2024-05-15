@@ -49,7 +49,7 @@
     </div>
     <div class="bottom">
       <div class="item">
-        <button v-autotooltip="{ content: 'LBottom Left 提示文字', placement: 'bottom-start' }">
+        <button v-autotooltip="{ content: 'Bottom Left 提示文字', placement: 'bottom-start' }">
           下左
         </button>
       </div>
