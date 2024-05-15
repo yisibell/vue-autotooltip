@@ -80,5 +80,5 @@ Configuration details as belows:
 
 ## Has not binding value
 
-- If a binding value is not specified for `v-auotooltip`, the `innerText` of the referenced element will be displayed as the content of the tooltip.
+- If a binding value is not specified for `v-autotooltip`, the `innerText` of the referenced element will be displayed as the content of the tooltip.
 - Only when there is a text overflow will the display of tooltip be activated, and add a truncation effect to the text display.
