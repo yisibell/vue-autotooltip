@@ -1,10 +1,11 @@
-import type { ObjectDirective, DirectiveBinding } from 'vue'
+import type { DirectiveBinding } from 'vue'
 import { computePosition, offset, flip, shift, arrow, inline } from '@floating-ui/dom'
 import type {
   TooltipBindingValue,
   TooltipReferenceElement,
   UpdatePositionFn,
-  ShowTooltipFn
+  ShowTooltipFn,
+  AutotooltipDirective
 } from '@/lib/interfaces/core'
 
 const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
@@ -105,7 +106,7 @@ function isOverflowing(element: HTMLElement) {
   return element.scrollWidth > element.offsetWidth
 }
 
-export const Autotooltip: ObjectDirective<TooltipReferenceElement, TooltipBindingValue> = {
+export const Autotooltip: AutotooltipDirective = {
   bind(el) {
     el._init = (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => {
       const targetParent = el.parentElement || document.body

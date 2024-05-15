@@ -1,4 +1,4 @@
-import type { DirectiveBinding } from 'vue'
+import type { DirectiveBinding, ObjectDirective } from 'vue'
 import type { Placement } from '@floating-ui/dom'
 
 export interface TooltipOptions {
@@ -27,3 +27,5 @@ export type UpdatePositionFn = (
 ) => void
 
 export type ShowTooltipFn = UpdatePositionFn
+
+export type AutotooltipDirective = ObjectDirective<TooltipReferenceElement, TooltipBindingValue>
