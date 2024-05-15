@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.1.0...v1.1.1)
+
+### 🏡 Chore
+
+- Add github pages ([f020de7](https://github.com/yisibell/vue-autotooltip/commit/f020de7))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.1.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.0.2...v1.1.0)
