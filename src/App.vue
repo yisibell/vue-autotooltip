@@ -14,7 +14,21 @@
       <span v-autotooltip="`binding content`">tooltip content 4</span>
     </div>
     <div style="text-align: center">
-      <span v-autotooltip="{ content: `binding content`, effect: 'light' }">tooltip content 5</span>
+      <span
+        v-autotooltip="{ content: `binding content, dynamic count ${count}`, effect: 'light' }"
+        @click="inc"
+      >
+        dynamic tooltip content 5
+      </span>
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const count = ref(0)
+const inc = () => {
+  count.value++
+}
+</script>

@@ -1,16 +1,27 @@
 import type { ObjectDirective, DirectiveBinding } from 'vue'
 import { computePosition, offset, flip, shift, arrow, inline } from '@floating-ui/dom'
-import type { TooltipBindingValue, TooltipReferenceElement } from '@/lib/interfaces/core'
+import type {
+  TooltipBindingValue,
+  TooltipReferenceElement,
+  UpdatePositionFn,
+  ShowTooltipFn
+} from '@/lib/interfaces/core'
 
-function updatePosition(ref: HTMLElement, tooltip: HTMLElement, arrowElement?: HTMLElement | null) {
+const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
+  const arrowElement = opts?.arrowElement
+  const bindingOpts = opts?.bindingValue
+
   const middleware = [offset(6), flip(), shift({ padding: 5 }), inline()]
 
   if (arrowElement) {
     middleware.push(arrow({ element: arrowElement }))
   }
 
+  const placement =
+    typeof bindingOpts !== 'string' && bindingOpts?.placement ? bindingOpts?.placement : 'top'
+
   computePosition(ref, tooltip, {
-    placement: 'top',
+    placement,
     middleware
   }).then(({ x, y, placement, middlewareData }) => {
     Object.assign(tooltip.style, {
@@ -69,9 +80,9 @@ function updatePosition(ref: HTMLElement, tooltip: HTMLElement, arrowElement?: H
   })
 }
 
-function showTooltip(ref: HTMLElement, tooltip: HTMLElement, arrowElement?: HTMLElement | null) {
+const showTooltip: ShowTooltipFn = (ref, tooltip, opts) => {
   tooltip.style.display = 'block'
-  updatePosition(ref, tooltip, arrowElement)
+  updatePosition(ref, tooltip, opts)
 }
 
 function hideTooltip(tooltip: HTMLElement) {
@@ -102,16 +113,21 @@ export const Autotooltip: ObjectDirective<TooltipReferenceElement, TooltipBindin
         typeof binding.value === 'string' ? binding.value : binding.value?.content
       const content = bindingContent || el.innerText
 
-      if (!el?._tooltipEl) {
-        const tooltipEl = createTooltipElement(content, binding.value)
-        targetParent.appendChild(tooltipEl)
-        el._tooltipEl = tooltipEl
-        el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
+      if (el?._tooltipEl) {
+        targetParent.removeChild(el._tooltipEl)
       }
+
+      const tooltipEl = createTooltipElement(content, binding.value)
+      targetParent.appendChild(tooltipEl)
+      el._tooltipEl = tooltipEl
+      el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
 
       el._showTooltipListener = () => {
         if ((bindingContent || isOverflowing(el)) && el._tooltipEl) {
-          showTooltip(el, el._tooltipEl, el._tooltipArrowEl)
+          showTooltip(el, el._tooltipEl, {
+            arrowElement: el._tooltipArrowEl,
+            bindingValue: binding.value
+          })
         }
       }
 
