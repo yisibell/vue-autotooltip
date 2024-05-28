@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- Support specify the arrow width of tooltip ([f5faadb](https://github.com/yisibell/vue-autotooltip/commit/f5faadb))
+- Specify whether to display arrows ([d081488](https://github.com/yisibell/vue-autotooltip/commit/d081488))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.2.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.1.1...v1.2.0)
