@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.1
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.0...v1.3.1)
+
+### 🩹 Fixes
+
+- Tooltip content update failed problem ([21abc48](https://github.com/yisibell/vue-autotooltip/commit/21abc48))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.3.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.2.0...v1.3.0)
