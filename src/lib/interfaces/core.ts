@@ -5,6 +5,7 @@ export interface TooltipOptions {
   content?: string
   effect?: 'dark' | 'light'
   placement?: Placement
+  appendTo?: HTMLElement | string
 }
 
 export type TooltipBindingValue = string | TooltipOptions | undefined

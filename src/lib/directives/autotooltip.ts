@@ -5,12 +5,27 @@ import type {
   TooltipReferenceElement,
   UpdatePositionFn,
   ShowTooltipFn,
-  AutotooltipDirective
+  AutotooltipDirective,
+  TooltipOptions
 } from '@/lib/interfaces/core'
+
+const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions> => {
+  const defaultOptions: Required<TooltipOptions> = {
+    content: '',
+    appendTo: document.body,
+    effect: 'dark',
+    placement: 'top'
+  }
+
+  return typeof bindingValue === 'string' || !bindingValue
+    ? defaultOptions
+    : Object.assign(defaultOptions, bindingValue)
+}
 
 const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
   const arrowElement = opts?.arrowElement
-  const bindingOpts = opts?.bindingValue
+
+  const options = getOptions(opts?.bindingValue)
 
   const middleware = [offset(6), flip(), shift({ padding: 5 }), inline()]
 
@@ -18,8 +33,7 @@ const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
     middleware.push(arrow({ element: arrowElement }))
   }
 
-  const placement =
-    typeof bindingOpts !== 'string' && bindingOpts?.placement ? bindingOpts?.placement : 'top'
+  const placement = options.placement
 
   computePosition(ref, tooltip, {
     placement,
@@ -91,7 +105,8 @@ function hideTooltip(tooltip: HTMLElement) {
 }
 
 const createTooltipElement = (content: string, opts: TooltipBindingValue) => {
-  const themeClassName = typeof opts === 'string' ? 'is-dark' : `is-${opts?.effect || 'dark'}`
+  const options = getOptions(opts)
+  const themeClassName = `is-${options.effect}`
 
   const wrapper = document.createElement('div')
   wrapper.classList.add('autotooltip-wrapper')
@@ -109,7 +124,13 @@ function isOverflowing(element: HTMLElement) {
 export const Autotooltip: AutotooltipDirective = {
   bind(el) {
     el._init = (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => {
-      const targetParent = el.parentElement || document.body
+      const options = getOptions(binding.value)
+
+      const targetParent =
+        typeof options.appendTo === 'string'
+          ? document.querySelector(options.appendTo) || document.body
+          : options.appendTo
+
       const bindingContent =
         typeof binding.value === 'string' ? binding.value : binding.value?.content
       const content = bindingContent || el.innerText
