@@ -175,7 +175,7 @@ export const Autotooltip: AutotooltipDirective = {
     el.classList.add('autotooltip--text-truncate')
     el._init && el._init(el, binding)
   },
-  update(el, binding) {
+  componentUpdated(el, binding) {
     el._init && el._init(el, binding)
   },
   unbind(el) {
