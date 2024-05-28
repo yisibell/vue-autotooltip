@@ -16,7 +16,8 @@ const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions
     appendTo: document.body,
     effect: 'dark',
     placement: 'top',
-    arrowWidth: 8
+    arrowWidth: 8,
+    showArrow: true
   }
 
   return typeof bindingValue === 'string' || !bindingValue
@@ -27,10 +28,11 @@ const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions
 const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
   const options = getOptions(opts?.bindingValue)
   const arrowElement = opts?.arrowElement
+  const showArrow = options.showArrow && arrowElement
 
   const middleware = [offset(6), flip(), shift({ padding: 5 }), inline()]
 
-  if (arrowElement) {
+  if (showArrow) {
     middleware.push(arrow({ element: arrowElement }))
   }
 
@@ -45,7 +47,7 @@ const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
       top: `${y}px`
     })
 
-    if (arrowElement) {
+    if (showArrow) {
       // Accessing the data
       const arrowX = middlewareData.arrow?.x
       const arrowY = middlewareData.arrow?.y

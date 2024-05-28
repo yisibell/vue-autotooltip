@@ -7,6 +7,7 @@ export interface TooltipOptions {
   placement?: Placement
   appendTo?: HTMLElement | string
   arrowWidth?: number
+  showArrow?: boolean
 }
 
 export type TooltipBindingValue = string | TooltipOptions | undefined

@@ -79,6 +79,7 @@ Configuration details as belows:
 | `placement`  |         `string`         |      `top`      |           Position of Tooltip.           |
 |  `appendTo`  | `string` / `HTMLElement` | `document.body` | Where to insert the **tooltip** element. |
 | `arrowWidth` |         `number`         |       `8`       |   Specify the arrow width of tooltip.    |
+| `showArrow`  |        `boolean`         |     `true`      |    Specify whether to display arrows.    |
 
 ## Has not binding value
 
