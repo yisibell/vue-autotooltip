@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.1.1...v1.2.0)
+
+### 🚀 Enhancements
+
+- Support modify appendTo element ([5985cb5](https://github.com/yisibell/vue-autotooltip/commit/5985cb5))
+
+### 🩹 Fixes
+
+- Example deploy ([5d601f7](https://github.com/yisibell/vue-autotooltip/commit/5d601f7))
+- **example:** Fix basic usage example text ([0e78fa4](https://github.com/yisibell/vue-autotooltip/commit/0e78fa4))
+
+### 🏡 Chore
+
+- **docs:** Update readme ([7e5eb34](https://github.com/yisibell/vue-autotooltip/commit/7e5eb34))
+- **docs:** Fix readme ([b3d5a71](https://github.com/yisibell/vue-autotooltip/commit/b3d5a71))
+- **example:** Update example ([832d7e7](https://github.com/yisibell/vue-autotooltip/commit/832d7e7))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.1.1
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.1.0...v1.1.1)
