@@ -8,13 +8,15 @@ import type {
   AutotooltipDirective,
   TooltipOptions
 } from '@/lib/interfaces/core'
+import { css } from 'fourdom'
 
 const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions> => {
   const defaultOptions: Required<TooltipOptions> = {
     content: '',
     appendTo: document.body,
     effect: 'dark',
-    placement: 'top'
+    placement: 'top',
+    arrowWidth: 8
   }
 
   return typeof bindingValue === 'string' || !bindingValue
@@ -23,9 +25,8 @@ const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions
 }
 
 const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
-  const arrowElement = opts?.arrowElement
-
   const options = getOptions(opts?.bindingValue)
+  const arrowElement = opts?.arrowElement
 
   const middleware = [offset(6), flip(), shift({ padding: 5 }), inline()]
 
@@ -66,7 +67,7 @@ const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
 
       if (staticSide) {
         Object.assign(arrowElement.style, {
-          [staticSide]: '-5px'
+          [staticSide]: `-${options.arrowWidth / 2}px`
         })
 
         if (staticSide === 'bottom') {
@@ -109,6 +110,11 @@ const createTooltipElement = (content: string, opts: TooltipBindingValue) => {
   const themeClassName = `is-${options.effect}`
 
   const wrapper = document.createElement('div')
+
+  css(wrapper, {
+    '--autotooltip-arrow--width': `${options.arrowWidth}px`
+  })
+
   wrapper.classList.add('autotooltip-wrapper')
   wrapper.classList.add(themeClassName)
 

@@ -29,8 +29,8 @@
   .autotooltip {
     &__arrow {
       position: absolute;
-      width: 8px;
-      height: 8px;
+      width: var(--autotooltip-arrow--width);
+      height: var(--autotooltip-arrow--width);
       transform: rotate(45deg);
 
       &.is-dark {

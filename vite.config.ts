@@ -34,7 +34,7 @@ export default defineConfig({
           formats: ['es', 'cjs']
         },
         rollupOptions: {
-          external: ['vue', '@floating-ui/dom']
+          external: ['vue', '@floating-ui/dom', 'fourdom']
         },
         copyPublicDir: false
       }

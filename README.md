@@ -72,12 +72,13 @@ Vue.directive('autotooltip', Autotooltip)
 
 Configuration details as belows:
 
-|     Key     |           Type           |  Default Value  |               Description                |
-| :---------: | :----------------------: | :-------------: | :--------------------------------------: |
-|  `content`  |         `string`         |   `undefined`   |           Content of tooltip.            |
-|  `effect`   |     `dark` / `light`     |     `dark`      |              Tooltip theme.              |
-| `placement` |         `string`         |      `top`      |           Position of Tooltip.           |
-| `appendTo`  | `string` / `HTMLElement` | `document.body` | Where to insert the **tooltip** element. |
+|     Key      |           Type           |  Default Value  |               Description                |
+| :----------: | :----------------------: | :-------------: | :--------------------------------------: |
+|  `content`   |         `string`         |   `undefined`   |           Content of tooltip.            |
+|   `effect`   |     `dark` / `light`     |     `dark`      |              Tooltip theme.              |
+| `placement`  |         `string`         |      `top`      |           Position of Tooltip.           |
+|  `appendTo`  | `string` / `HTMLElement` | `document.body` | Where to insert the **tooltip** element. |
+| `arrowWidth` |         `number`         |       `8`       |   Specify the arrow width of tooltip.    |
 
 ## Has not binding value
 

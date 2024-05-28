@@ -6,6 +6,7 @@ export interface TooltipOptions {
   effect?: 'dark' | 'light'
   placement?: Placement
   appendTo?: HTMLElement | string
+  arrowWidth?: number
 }
 
 export type TooltipBindingValue = string | TooltipOptions | undefined
