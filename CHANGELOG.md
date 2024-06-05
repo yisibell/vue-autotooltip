@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.2
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.1...v1.3.2)
+
+### 🩹 Fixes
+
+- Hide tooltip when vnode unbind ([dd1b8bc](https://github.com/yisibell/vue-autotooltip/commit/dd1b8bc))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.3.1
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.0...v1.3.1)
