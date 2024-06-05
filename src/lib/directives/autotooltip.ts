@@ -168,7 +168,9 @@ export const Autotooltip: AutotooltipDirective = {
       }
 
       el.addEventListener('mouseenter', el._showTooltipListener)
+      el.addEventListener('focus', el._showTooltipListener)
       el.addEventListener('mouseout', el._hideTooltipListener)
+      el.addEventListener('blur', el._hideTooltipListener)
     }
   },
   inserted(el, binding) {
@@ -179,7 +181,13 @@ export const Autotooltip: AutotooltipDirective = {
     el._init && el._init(el, binding)
   },
   unbind(el) {
+    if (el._tooltipEl) {
+      hideTooltip(el._tooltipEl)
+    }
+
     el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
+    el._showTooltipListener && el.removeEventListener('focus', el._showTooltipListener)
     el._hideTooltipListener && el.removeEventListener('mouseout', el._hideTooltipListener)
+    el._hideTooltipListener && el.removeEventListener('blur', el._hideTooltipListener)
   }
 }
