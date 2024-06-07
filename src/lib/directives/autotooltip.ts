@@ -11,8 +11,7 @@ import {
   hideTooltip,
   isOverflowing,
   clearEvent,
-  updatePosition,
-  updateTextOverflow
+  updatePosition
 } from '@/lib/utils'
 import { autoUpdate } from '@floating-ui/dom'
 
@@ -44,13 +43,15 @@ export const Autotooltip: AutotooltipDirective = {
         el._tooltipEl = tooltipEl
         el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
 
-        updateTextOverflow(el)
-
         if (isNeedShowTooltip && el._tooltipEl) {
+          el.style.textOverflow = 'ellipsis'
+
           showTooltip(el, el._tooltipEl, {
             arrowElement: el._tooltipArrowEl,
             bindingValue: binding.value
           })
+        } else {
+          el.style.textOverflow = 'clip'
         }
 
         el._cleanup = autoUpdate(el, el._tooltipEl, () => {
@@ -78,9 +79,8 @@ export const Autotooltip: AutotooltipDirective = {
   inserted(el) {
     el.classList.add('autotooltip--text-truncate')
   },
-  update(el, binding) {
-    updateTextOverflow(el)
-
+  componentUpdated(el, binding) {
+    el.style.textOverflow = 'ellipsis'
     el._init && el._init(el, binding)
   },
   unbind(el) {
