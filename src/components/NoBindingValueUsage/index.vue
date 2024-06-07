@@ -2,6 +2,10 @@
   <div class="box">
     <button v-autotooltip @click="count++">{{ content1 + count }}</button>
     <button v-autotooltip>content!</button>
+
+    <button v-autotooltip>
+      <span>test content, nested dom</span>
+    </button>
   </div>
 </template>
 

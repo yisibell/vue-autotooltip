@@ -26,17 +26,21 @@ export const Autotooltip: AutotooltipDirective = {
         typeof binding.value === 'string' ? binding.value : binding.value?.content
       const content = bindingContent || el.innerText
 
+      const isNeedShowTooltip = !!bindingContent || isOverflowing(el)
+
       if (el?._tooltipEl) {
         targetParent.removeChild(el._tooltipEl)
       }
 
-      const tooltipEl = createTooltipElement(content, binding.value)
-      targetParent.appendChild(tooltipEl)
-      el._tooltipEl = tooltipEl
-      el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
+      if (isNeedShowTooltip) {
+        const tooltipEl = createTooltipElement(content, binding.value)
+        targetParent.appendChild(tooltipEl)
+        el._tooltipEl = tooltipEl
+        el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
+      }
 
       el._showTooltipListener = () => {
-        if ((bindingContent || isOverflowing(el)) && el._tooltipEl) {
+        if (isNeedShowTooltip && el._tooltipEl) {
           showTooltip(el, el._tooltipEl, {
             arrowElement: el._tooltipArrowEl,
             bindingValue: binding.value
@@ -51,9 +55,7 @@ export const Autotooltip: AutotooltipDirective = {
       }
 
       el.addEventListener('mouseenter', el._showTooltipListener)
-      el.addEventListener('focus', el._showTooltipListener)
-      el.addEventListener('mouseout', el._hideTooltipListener)
-      el.addEventListener('blur', el._hideTooltipListener)
+      el.addEventListener('mouseleave', el._hideTooltipListener)
     }
   },
   inserted(el, binding) {
@@ -69,8 +71,6 @@ export const Autotooltip: AutotooltipDirective = {
     }
 
     el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
-    el._showTooltipListener && el.removeEventListener('focus', el._showTooltipListener)
-    el._hideTooltipListener && el.removeEventListener('mouseout', el._hideTooltipListener)
-    el._hideTooltipListener && el.removeEventListener('blur', el._hideTooltipListener)
+    el._hideTooltipListener && el.removeEventListener('mouseleave', el._hideTooltipListener)
   }
 }
