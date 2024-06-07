@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.4
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.3...v1.4.4)
+
+### 🩹 Fixes
+
+- TextOverflow handle problem ([aad7d9c](https://github.com/yisibell/vue-autotooltip/commit/aad7d9c))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.3
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.2...v1.4.3)

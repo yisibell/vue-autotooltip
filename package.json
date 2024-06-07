@@ -1,6 +1,6 @@
 {
   "name": "vue-autotooltip",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Auto tooltip for Vue.js",
   "type": "module",
   "files": [
