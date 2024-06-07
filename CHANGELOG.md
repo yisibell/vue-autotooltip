@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.6
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.5...v1.4.6)
+
+### 🩹 Fixes
+
+- Update text-overflow failed ([607000a](https://github.com/yisibell/vue-autotooltip/commit/607000a))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.5
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.4...v1.4.5)
