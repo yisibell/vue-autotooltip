@@ -127,6 +127,14 @@ export function isOverflowing(element: HTMLElement) {
   return element.scrollWidth > element.offsetWidth
 }
 
+export const updateTextOverflow = (el: TooltipReferenceElement) => {
+  if (isOverflowing(el)) {
+    el.style.textOverflow = 'ellipsis'
+  } else {
+    el.style.textOverflow = 'clip'
+  }
+}
+
 export const generateId = function () {
   return Math.floor(Math.random() * 10000)
 }
