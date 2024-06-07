@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.7
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.6...v1.4.7)
+
+### 🩹 Fixes
+
+- Tooltip reference text overflow problem ([6de37f5](https://github.com/yisibell/vue-autotooltip/commit/6de37f5))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.6
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.5...v1.4.6)
