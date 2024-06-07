@@ -6,6 +6,10 @@
     <button v-autotooltip>
       <span>test content, nested dom</span>
     </button>
+
+    <label v-autotooltip style="padding-right: 20px; display: inline-block; max-width: 157px">
+      has padding content
+    </label>
   </div>
 </template>
 

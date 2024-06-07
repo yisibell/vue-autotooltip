@@ -123,5 +123,5 @@ export const createTooltipElement = (content: string, opts: TooltipBindingValue)
 }
 
 export function isOverflowing(element: HTMLElement) {
-  return element.scrollWidth > element.offsetWidth
+  return element.scrollWidth > element.clientWidth
 }
