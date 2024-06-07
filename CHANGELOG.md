@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.5
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.4...v1.4.5)
+
+### 🩹 Fixes
+
+- Tooltip display timing ([4254e94](https://github.com/yisibell/vue-autotooltip/commit/4254e94))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.4
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.3...v1.4.4)
