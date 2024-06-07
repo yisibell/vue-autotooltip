@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.1
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.0...v1.4.1)
+
+### 🩹 Fixes
+
+- Tooltip hide problem ([09bb2dd](https://github.com/yisibell/vue-autotooltip/commit/09bb2dd))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.2...v1.4.0)
