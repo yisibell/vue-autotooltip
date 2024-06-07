@@ -9,11 +9,14 @@ import {
   createTooltipElement,
   showTooltip,
   hideTooltip,
-  isOverflowing
+  isOverflowing,
+  clearEvent
 } from '@/lib/utils'
 
 export const Autotooltip: AutotooltipDirective = {
   bind(el) {
+    clearEvent(el)
+
     el._init = (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => {
       const options = getOptions(binding.value)
 
@@ -62,6 +65,9 @@ export const Autotooltip: AutotooltipDirective = {
     el.classList.add('autotooltip--text-truncate')
     el._init && el._init(el, binding)
   },
+  update(el, binding) {
+    el._init && el._init(el, binding)
+  },
   componentUpdated(el, binding) {
     el._init && el._init(el, binding)
   },
@@ -70,7 +76,6 @@ export const Autotooltip: AutotooltipDirective = {
       hideTooltip(el._tooltipEl)
     }
 
-    el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
-    el._hideTooltipListener && el.removeEventListener('mouseleave', el._hideTooltipListener)
+    clearEvent(el)
   }
 }

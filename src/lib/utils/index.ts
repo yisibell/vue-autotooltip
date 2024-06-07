@@ -4,7 +4,8 @@ import type {
   TooltipBindingValue,
   UpdatePositionFn,
   ShowTooltipFn,
-  TooltipOptions
+  TooltipOptions,
+  TooltipReferenceElement
 } from '@/lib/interfaces/core'
 
 export const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions> => {
@@ -123,5 +124,14 @@ export const createTooltipElement = (content: string, opts: TooltipBindingValue)
 }
 
 export function isOverflowing(element: HTMLElement) {
-  return element.scrollWidth > element.clientWidth
+  return element.scrollWidth > element.offsetWidth
+}
+
+export const generateId = function () {
+  return Math.floor(Math.random() * 10000)
+}
+
+export const clearEvent = (el: TooltipReferenceElement) => {
+  el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
+  el._hideTooltipListener && el.removeEventListener('mouseleave', el._hideTooltipListener)
 }
