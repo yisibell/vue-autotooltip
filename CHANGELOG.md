@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.2...v1.4.0)
+
+### 🚀 Enhancements
+
+- Support z-index css varibles ([16fe5fe](https://github.com/yisibell/vue-autotooltip/commit/16fe5fe))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.3.2
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.3.1...v1.3.2)
