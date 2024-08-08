@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.8
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.7...v1.4.8)
+
+### 🩹 Fixes
+
+- Update default z-index to 10240 ([30a5f5f](https://github.com/yisibell/vue-autotooltip/commit/30a5f5f))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.7
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.6...v1.4.7)
