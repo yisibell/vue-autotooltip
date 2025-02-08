@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue2'
+import type { BuildOptions } from 'vite'
 
 const isBuildLib = () => {
   return process.env.BUILD_TYPE === 'lib'
@@ -22,7 +23,7 @@ export default defineConfig({
     }
   },
   build: isBuildLib()
-    ? {
+    ? ({
         outDir,
         target: 'es2015',
         lib: {
@@ -31,12 +32,13 @@ export default defineConfig({
           name: 'VueAutotooltip',
           // the proper extensions will be added
           fileName: 'vue-autotooltip',
-          formats: ['es', 'cjs']
+          formats: ['es', 'cjs'],
+          cssFileName: 'style'
         },
         rollupOptions: {
           external: ['vue', '@floating-ui/dom', 'fourdom']
         },
         copyPublicDir: false
-      }
+      } as BuildOptions)
     : { outDir }
 })

@@ -105,7 +105,9 @@ export const Autotooltip: AutotooltipDirective = {
   },
   componentUpdated(el, binding) {
     el.style.textOverflow = 'ellipsis'
-    el._init && el._init(el, binding)
+    if (el._init) {
+      el._init(el, binding)
+    }
   },
   unbind(el) {
     if (el._tooltipEl) {
