@@ -1,40 +1,20 @@
 <template>
-  <div class="box">
-    <button v-autotooltip @click="count++">{{ content1 + count }}</button>
-    <button v-autotooltip>content!</button>
-
-    <button v-autotooltip>
-      <span>test content, nested dom</span>
-    </button>
-
-    <label v-autotooltip style="padding-right: 20px; display: inline-block; max-width: 157px">
-      has padding content
-    </label>
+  <div class="">
+    <DemoPanel title="No binding value usage" :initial-expand="false">
+      <DemoCode />
+      <template #code>
+        <pre class="lang-markup"><code>{{ formatLibName(DemoCodeRaw) }}</code></pre>
+      </template>
+    </DemoPanel>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-export default defineComponent({
-  name: 'NoBindingValueUsage',
-  setup() {
-    const content1 = ref('this is a text overflow content!')
+<script lang="ts" setup>
+import DemoCode from './DemoCode.vue'
+import DemoCodeRaw from './DemoCode.vue?raw'
+import { formatLibName } from '@/utils'
 
-    const count = ref(1)
-
-    return {
-      content1,
-      count
-    }
-  }
+defineOptions({
+  name: 'NoBindingValueUsage'
 })
 </script>
-
-<style lang="scss" scoped>
-.box {
-  button {
-    max-width: 100px;
-    margin-right: 16px;
-  }
-}
-</style>

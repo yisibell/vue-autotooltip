@@ -1,22 +1,20 @@
 <template>
-  <div class="box">
-    <button v-autotooltip="{ content: 'dark theme', effect: 'dark' }">dark</button>
-    <button v-autotooltip="{ content: 'light theme', effect: 'light' }">light</button>
+  <div class="">
+    <DemoPanel title="Theme usage" :initial-expand="false">
+      <DemoCode />
+      <template #code>
+        <pre class="lang-markup"><code>{{ formatLibName(DemoCodeRaw) }}</code></pre>
+      </template>
+    </DemoPanel>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'ThemeUsage',
-  setup() {}
+<script lang="ts" setup>
+import DemoCode from './DemoCode.vue'
+import DemoCodeRaw from './DemoCode.vue?raw'
+import { formatLibName } from '@/utils'
+
+defineOptions({
+  name: 'ThemeUsage'
 })
 </script>
-
-<style lang="scss" scoped>
-.box {
-  button {
-    margin-right: 16px;
-  }
-}
-</style>

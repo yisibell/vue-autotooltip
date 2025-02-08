@@ -16,7 +16,7 @@ import {
 import { autoUpdate } from '@floating-ui/dom'
 
 export const Autotooltip: AutotooltipDirective = {
-  bind(el, binding) {
+  created(el, binding) {
     el._init = (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => {
       clearEvent(el)
 
@@ -100,16 +100,16 @@ export const Autotooltip: AutotooltipDirective = {
 
     el._init(el, binding)
   },
-  inserted(el) {
+  mounted(el) {
     el.classList.add('autotooltip--text-truncate')
   },
-  componentUpdated(el, binding) {
+  updated(el, binding) {
     el.style.textOverflow = 'ellipsis'
     if (el._init) {
       el._init(el, binding)
     }
   },
-  unbind(el) {
+  unmounted(el) {
     if (el._tooltipEl) {
       hideTooltip(el._tooltipEl)
     }

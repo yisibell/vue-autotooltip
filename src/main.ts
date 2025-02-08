@@ -1,11 +1,18 @@
-import Vue from 'vue'
+import './assets/main.css'
+
+import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router'
+import DemoifyUI from 'demoify'
 import { Autotooltip } from '@/lib/main'
 
-Vue.config.productionTip = false
+import 'demoify/lib/style.css'
+import 'prismjs/themes/prism.min.css'
 
-Vue.directive('autotooltip', Autotooltip)
+const app = createApp(App)
 
-new Vue({
-  render: (h) => h(App)
-}).$mount('#app')
+app.directive('autotooltip', Autotooltip)
+app.use(DemoifyUI)
+app.use(router)
+
+app.mount('#app')

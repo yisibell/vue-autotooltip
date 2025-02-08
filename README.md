@@ -10,7 +10,10 @@
 
 # vue-autotooltip
 
-Auto tooltip for Vue.js
+Auto tooltip (directive) for Vue.js.
+
+- [Release Notes](./CHANGELOG.md)
+- [Examples](http://hongwenqing.com/vue-autotooltip/)
 
 # Features
 
@@ -18,8 +21,8 @@ Auto tooltip for Vue.js
 
 | Version | Support Vue Version | Status |
 | :-----: | :-----------------: | :----: |
-| `v1.x`  |      `v2.7.x`       |   ✔️   |
-|   `-`   |      `v3.2.x`       |   🚧   |
+| `v1.x`  |      `^2.7.x`       |   ✔️   |
+| `v2.x`  |      `^3.2.x`       |   ✔️   |
 
 # Installation
 
@@ -45,12 +48,14 @@ import 'vue-autotooltip/dist/style.css'
 2. Install directive
 
 ```ts
-import Vue from 'vue'
+import { createApp } from 'vue'
 import { Autotooltip } from 'vue-autotooltip'
-
+import App from '@/App.vue'
 // ...
 
-Vue.directive('autotooltip', Autotooltip)
+const app = createApp(App)
+
+app.directive('autotooltip', Autotooltip)
 
 // ...
 ```
