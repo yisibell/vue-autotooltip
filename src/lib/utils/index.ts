@@ -140,7 +140,15 @@ export const generateId = function () {
 }
 
 export const clearEvent = (el: TooltipReferenceElement) => {
-  el._showTooltipListener && el.removeEventListener('mouseenter', el._showTooltipListener)
-  el._hideTooltipListener && el.removeEventListener('mouseleave', el._hideTooltipListener)
-  el._cleanup && el._cleanup()
+  if (el._showTooltipListener) {
+    el.removeEventListener('mouseenter', el._showTooltipListener)
+  }
+
+  if (el._hideTooltipListener) {
+    el.removeEventListener('mouseleave', el._hideTooltipListener)
+  }
+
+  if (el._cleanup) {
+    el._cleanup()
+  }
 }

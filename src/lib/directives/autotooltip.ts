@@ -39,12 +39,30 @@ export const Autotooltip: AutotooltipDirective = {
         }
 
         const tooltipEl = createTooltipElement(content, binding.value)
+
+        tooltipEl.addEventListener('mouseenter', () => {
+          el._isHovered = true
+        })
+
+        tooltipEl.addEventListener('mouseleave', () => {
+          el._isHovered = false
+          setTimeout(() => {
+            if (!el._isHovered) {
+              if (el._tooltipEl) {
+                hideTooltip(el._tooltipEl)
+              }
+            }
+          }, 100) // 延迟隐藏
+        })
+
         targetParent.appendChild(tooltipEl)
         el._tooltipEl = tooltipEl
         el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
 
         if (isNeedShowTooltip && el._tooltipEl) {
           el.style.textOverflow = 'ellipsis'
+
+          el._isHovered = true
 
           showTooltip(el, el._tooltipEl, {
             arrowElement: el._tooltipArrowEl,
@@ -65,9 +83,15 @@ export const Autotooltip: AutotooltipDirective = {
       }
 
       el._hideTooltipListener = () => {
-        if (el._tooltipEl) {
-          hideTooltip(el._tooltipEl)
-        }
+        el._isHovered = false
+
+        setTimeout(() => {
+          if (!el._isHovered) {
+            if (el._tooltipEl) {
+              hideTooltip(el._tooltipEl)
+            }
+          }
+        }, 100) // 延迟隐藏
       }
 
       el.addEventListener('mouseenter', el._showTooltipListener)

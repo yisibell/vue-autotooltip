@@ -19,6 +19,8 @@ export interface TooltipReferenceElement extends HTMLElement {
   _hideTooltipListener?: EventListener
   _init?: (el: TooltipReferenceElement, binding: DirectiveBinding<TooltipBindingValue>) => void
   _cleanup?: () => void
+  /** 跟踪鼠标是否在 reference 或 floating 元素上 */
+  _isHovered?: boolean
 }
 
 export type UpdatePositionFn = (
