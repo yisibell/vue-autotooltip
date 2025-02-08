@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.8...v1.5.0)
+
+### 🚀 Enhancements
+
+- Support hover to floating element ([0df936c](https://github.com/yisibell/vue-autotooltip/commit/0df936c))
+- Up eslint to flat api ([a074ae0](https://github.com/yisibell/vue-autotooltip/commit/a074ae0))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v1.4.8
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.4.7...v1.4.8)
