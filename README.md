@@ -87,7 +87,7 @@ Configuration details as belows:
 | `showArrow`  |            `boolean`            |     `true`      |    Specify whether to display arrows.    |
 |  `trigger`   |        `hover` / `click`        |     `hover`     |        Specify the trigger event.        |
 |  `disabled`  |            `boolean`            |     `false`     |     Whether to disable the tooltip.      |
-|  `duration`  |            `number`             |     `false`     |        Tooltip display duration.         |
+|  `duration`  |            `number`             |       `0`       |        Tooltip display duration.         |
 |   `offset`   |       `[number, number]`        |    `[0, 0]`     |               Set offset.                |
 
 ## Has not binding value
