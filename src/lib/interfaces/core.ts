@@ -2,6 +2,7 @@ import type { DirectiveBinding, ObjectDirective } from 'vue'
 import type { Placement } from '@floating-ui/dom'
 
 export interface TooltipOptions {
+  zIndex?: number
   trigger?: 'hover' | 'click'
   disabled?: boolean
   duration?: number

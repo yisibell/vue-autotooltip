@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 300px;overflow-y: auto;">
     <div>Defaults is <code>hover</code></div>
 
     <div class="box">
@@ -9,7 +9,7 @@
 
     <div>With <code>click</code></div>
 
-    <div class="box">
+    <div class="box" style="height: 1000px;">
       <button v-autotooltip="{ content: 'dark theme', effect: 'dark', trigger: 'click' }">
         dark
       </button>
@@ -18,7 +18,7 @@
           content: 'dark light theme',
           effect: 'dark-light',
           trigger: 'click',
-          duration: 3000,
+          duration: 0,
           placement: 'bottom',
           disabled: disabled
         }"

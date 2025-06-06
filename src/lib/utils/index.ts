@@ -1,5 +1,5 @@
 import { css } from 'fourdom'
-import { computePosition, offset, flip, shift, arrow, inline, autoUpdate } from '@floating-ui/dom'
+import { computePosition, offset, flip, shift, arrow, hide, inline, autoUpdate } from '@floating-ui/dom'
 import type {
   TooltipBindingValue,
   UpdatePositionFn,
@@ -17,8 +17,19 @@ export const getTargetParent = (options: TooltipOptions) => {
   return targetParent
 }
 
+export const setArrowDirection = (arrowElement: HTMLElement, direction: 'up' | 'down' | 'left' | 'right') => {
+  const directions = ['up', 'down', 'left', 'roght']
+
+  directions.filter(v => v !== direction).forEach(v => {
+    arrowElement.classList.remove(v)
+  })
+
+  arrowElement.classList.add(direction)
+}
+
 export const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions> => {
   const defaultOptions: Required<TooltipOptions> = {
+    zIndex: 1024,
     offset: [0, 0],
     duration: 0,
     disabled: false,
@@ -40,8 +51,19 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
   const options = getOptions(opts?.bindingValue)
   const arrowElement = opts?.arrowElement
   const showArrow = options.showArrow && arrowElement
+  const offsetY = options.offset[1]
+  const offsetX = options.offset[0]
 
-  const middleware = [offset(6), flip(), shift({ padding: 5 }), inline()]
+  const middleware = [
+    offset({
+    mainAxis: 10 + offsetX,
+    crossAxis: 0 + offsetY
+    }), 
+    flip(), 
+    shift({ padding: 5 }), 
+    inline(),
+    hide()
+  ]
 
   if (showArrow) {
     middleware.push(arrow({ element: arrowElement }))
@@ -54,26 +76,18 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
     placement,
     middleware
   }).then(({ x, y, placement, middlewareData }) => {
-    // arrow direction
-    const arrowStaticSide = {
-      top: 'bottom',
-      right: 'left',
-      bottom: 'top',
-      left: 'right'
-    }[placement.split('-')[0]]
 
-    const offsetY = options.offset[1]
-    const offsetX = options.offset[0]
-
-    const finalOffsetY =
-      arrowStaticSide === 'top' ? +offsetY : arrowStaticSide === 'bottom' ? -offsetY : 0
-
-    const finalOffsetX =
-      arrowStaticSide === 'right' ? -offsetX : arrowStaticSide === 'left' ? +offsetX : 0
+    if (middlewareData.hide) {
+      Object.assign(tooltip.style, {
+        visibility: middlewareData.hide.referenceHidden
+          ? 'hidden'
+          : 'visible',
+      });
+    }
 
     Object.assign(tooltip.style, {
-      left: `${x + finalOffsetX}px`,
-      top: `${y + finalOffsetY}px`
+      left: `${x}px`,
+      top: `${y}px`
     })
 
     if (showArrow) {
@@ -88,6 +102,15 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
         bottom: ''
       })
 
+      // arrow direction
+      const arrowStaticSide = {
+        top: 'bottom',
+        right: 'left',
+        bottom: 'top',
+        left: 'right'
+      }[placement.split('-')[0]]
+
+
       if (arrowStaticSide) {
         Object.assign(arrowElement.style, {
           [arrowStaticSide]: isLightTheme
@@ -96,13 +119,13 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
         })
 
         if (arrowStaticSide === 'bottom') {
-          arrowElement.classList.add('down')
+          setArrowDirection(arrowElement, 'down')
         } else if (arrowStaticSide === 'top') {
-          arrowElement.classList.add('up')
+          setArrowDirection(arrowElement, 'up')
         } else if (arrowStaticSide === 'left') {
-          arrowElement.classList.add('left')
+          setArrowDirection(arrowElement, 'left')
         } else if (arrowStaticSide === 'right') {
-          arrowElement.classList.add('right')
+          setArrowDirection(arrowElement, 'right')
         }
       }
     }
@@ -126,6 +149,10 @@ export function hideTooltip(el?: TooltipReferenceElement) {
       el._visible = false
       el._tooltipEl.style.display = ''
     }
+
+    if(el._cleanup) {
+      el._cleanup()
+    }
   }
 }
 
@@ -136,7 +163,8 @@ export const createTooltipElement = (content: string, opts: TooltipBindingValue)
   const wrapper = document.createElement('div')
 
   css(wrapper, {
-    '--autotooltip-arrow--width': `${options.arrowWidth}px`
+    '--autotooltip-arrow--width': `${options.arrowWidth}px`,
+    '--autotooltip-theme-z-index': options.zIndex
   })
 
   wrapper.classList.add('autotooltip-wrapper')
