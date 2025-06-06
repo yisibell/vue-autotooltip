@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v2.1.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v2.0.0...v2.1.0)
+
+### 🚀 Enhancements
+
+- Support trigger, disabled, duration and offset options ([f3078e3](https://github.com/yisibell/vue-autotooltip/commit/f3078e3))
+
+### ❤️ Contributors
+
+- Wenqing <wenqing@kerrylan.com>
+
 ## v2.0.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v1.5.1...v2.0.0)
