@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v2.2.1
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v2.2.0...v2.2.1)
+
 ## v2.2.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v2.1.0...v2.2.0)
