@@ -1,5 +1,5 @@
 import { css } from 'fourdom'
-import { computePosition, offset, flip, shift, arrow, inline } from '@floating-ui/dom'
+import { computePosition, offset, flip, shift, arrow, inline, autoUpdate } from '@floating-ui/dom'
 import type {
   TooltipBindingValue,
   UpdatePositionFn,
@@ -8,8 +8,21 @@ import type {
   TooltipReferenceElement
 } from '@/lib/interfaces/core'
 
+export const getTargetParent = (options: TooltipOptions) => {
+  const targetParent =
+    typeof options.appendTo === 'string'
+      ? document.querySelector(options.appendTo) || document.body
+      : options.appendTo
+
+  return targetParent
+}
+
 export const getOptions = (bindingValue?: TooltipBindingValue): Required<TooltipOptions> => {
   const defaultOptions: Required<TooltipOptions> = {
+    offset: [0, 0],
+    duration: 0,
+    disabled: false,
+    trigger: 'hover',
     content: '',
     appendTo: document.body,
     effect: 'dark',
@@ -35,14 +48,32 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
   }
 
   const placement = options.placement
+  const isLightTheme = options.effect === 'light'
 
   computePosition(ref, tooltip, {
     placement,
     middleware
   }).then(({ x, y, placement, middlewareData }) => {
+    // arrow direction
+    const arrowStaticSide = {
+      top: 'bottom',
+      right: 'left',
+      bottom: 'top',
+      left: 'right'
+    }[placement.split('-')[0]]
+
+    const offsetY = options.offset[1]
+    const offsetX = options.offset[0]
+
+    const finalOffsetY =
+      arrowStaticSide === 'top' ? +offsetY : arrowStaticSide === 'bottom' ? -offsetY : 0
+
+    const finalOffsetX =
+      arrowStaticSide === 'right' ? -offsetX : arrowStaticSide === 'left' ? +offsetX : 0
+
     Object.assign(tooltip.style, {
-      left: `${x}px`,
-      top: `${y}px`
+      left: `${x + finalOffsetX}px`,
+      top: `${y + finalOffsetY}px`
     })
 
     if (showArrow) {
@@ -57,39 +88,21 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
         bottom: ''
       })
 
-      // arrow direction
-      const staticSide = {
-        top: 'bottom',
-        right: 'left',
-        bottom: 'top',
-        left: 'right'
-      }[placement.split('-')[0]]
-
-      if (staticSide) {
+      if (arrowStaticSide) {
         Object.assign(arrowElement.style, {
-          [staticSide]: `-${options.arrowWidth / 2}px`
+          [arrowStaticSide]: isLightTheme
+            ? `-${options.arrowWidth / 2}px`
+            : `-${options.arrowWidth}px`
         })
 
-        if (staticSide === 'bottom') {
-          Object.assign(arrowElement.style, {
-            'border-bottom': 'var(--autotooltip-theme-border--light)',
-            'border-right': 'var(--autotooltip-theme-border--light)'
-          })
-        } else if (staticSide === 'top') {
-          Object.assign(arrowElement.style, {
-            'border-left': 'var(--autotooltip-theme-border--light)',
-            'border-top': 'var(--autotooltip-theme-border--light)'
-          })
-        } else if (staticSide === 'left') {
-          Object.assign(arrowElement.style, {
-            'border-left': 'var(--autotooltip-theme-border--light)',
-            'border-bottom': 'var(--autotooltip-theme-border--light)'
-          })
-        } else if (staticSide === 'right') {
-          Object.assign(arrowElement.style, {
-            'border-top': 'var(--autotooltip-theme-border--light)',
-            'border-right': 'var(--autotooltip-theme-border--light)'
-          })
+        if (arrowStaticSide === 'bottom') {
+          arrowElement.classList.add('down')
+        } else if (arrowStaticSide === 'top') {
+          arrowElement.classList.add('up')
+        } else if (arrowStaticSide === 'left') {
+          arrowElement.classList.add('left')
+        } else if (arrowStaticSide === 'right') {
+          arrowElement.classList.add('right')
         }
       }
     }
@@ -101,8 +114,19 @@ export const showTooltip: ShowTooltipFn = (ref, tooltip, opts) => {
   updatePosition(ref, tooltip, opts)
 }
 
-export function hideTooltip(tooltip: HTMLElement) {
-  tooltip.style.display = ''
+export function hideTooltip(el?: TooltipReferenceElement) {
+  if (el) {
+    if (el._autoHideTimer) {
+      clearTimeout(el._autoHideTimer)
+
+      el._autoHideTimer = null
+    }
+
+    if (el._tooltipEl) {
+      el._visible = false
+      el._tooltipEl.style.display = ''
+    }
+  }
 }
 
 export const createTooltipElement = (content: string, opts: TooltipBindingValue) => {
@@ -148,7 +172,54 @@ export const clearEvent = (el: TooltipReferenceElement) => {
     el.removeEventListener('mouseleave', el._hideTooltipListener)
   }
 
+  if (el._clickTooltipListener) {
+    el.removeEventListener('click', el._clickTooltipListener)
+  }
+
+  if (el._clickOutsideListener) {
+    document.removeEventListener('click', el._clickOutsideListener)
+  }
+
   if (el._cleanup) {
     el._cleanup()
   }
+}
+
+export const showTooltipWithCreate = (opts: {
+  target: TooltipReferenceElement
+  bindingValue: TooltipBindingValue
+}) => {
+  const options = getOptions(opts.bindingValue)
+  const el = opts.target
+
+  const targetParent = getTargetParent(options)
+
+  if (!targetParent) return
+
+  if (el?._tooltipEl) {
+    targetParent.removeChild(el._tooltipEl)
+  }
+
+  const content = options.content
+
+  const tooltipEl = createTooltipElement(content, opts.bindingValue)
+
+  targetParent.appendChild(tooltipEl)
+
+  el._tooltipEl = tooltipEl
+  el._tooltipArrowEl = tooltipEl.querySelector<HTMLElement>('.autotooltip__arrow')
+
+  el._cleanup = autoUpdate(el, el._tooltipEl, () => {
+    if (el._tooltipEl) {
+      updatePosition(el, el._tooltipEl, {
+        arrowElement: el._tooltipArrowEl,
+        bindingValue: opts.bindingValue
+      })
+    }
+  })
+
+  showTooltip(el, el._tooltipEl, {
+    arrowElement: el._tooltipArrowEl,
+    bindingValue: opts.bindingValue
+  })
 }

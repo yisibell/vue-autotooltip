@@ -77,14 +77,18 @@ app.directive('autotooltip', Autotooltip)
 
 Configuration details as belows:
 
-|     Key      |           Type           |  Default Value  |               Description                |
-| :----------: | :----------------------: | :-------------: | :--------------------------------------: |
-|  `content`   |         `string`         |   `undefined`   |           Content of tooltip.            |
-|   `effect`   |     `dark` / `light`     |     `dark`      |              Tooltip theme.              |
-| `placement`  |         `string`         |      `top`      |           Position of Tooltip.           |
-|  `appendTo`  | `string` / `HTMLElement` | `document.body` | Where to insert the **tooltip** element. |
-| `arrowWidth` |         `number`         |       `8`       |   Specify the arrow width of tooltip.    |
-| `showArrow`  |        `boolean`         |     `true`      |    Specify whether to display arrows.    |
+|     Key      |              Type               |  Default Value  |               Description                |
+| :----------: | :-----------------------------: | :-------------: | :--------------------------------------: |
+|  `content`   |            `string`             |   `undefined`   |           Content of tooltip.            |
+|   `effect`   | `dark` / `light` / `dark-light` |     `dark`      |              Tooltip theme.              |
+| `placement`  |            `string`             |      `top`      |           Position of Tooltip.           |
+|  `appendTo`  |    `string` / `HTMLElement`     | `document.body` | Where to insert the **tooltip** element. |
+| `arrowWidth` |            `number`             |       `8`       |   Specify the arrow width of tooltip.    |
+| `showArrow`  |            `boolean`            |     `true`      |    Specify whether to display arrows.    |
+|  `trigger`   |        `hover` / `click`        |     `hover`     |        Specify the trigger event.        |
+|  `disabled`  |            `boolean`            |     `false`     |     Whether to disable the tooltip.      |
+|  `duration`  |            `number`             |     `false`     |        Tooltip display duration.         |
+|   `offset`   |       `[number, number]`        |    `[0, 0]`     |               Set offset.                |
 
 ## Has not binding value
 

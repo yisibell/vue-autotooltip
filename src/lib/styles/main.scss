@@ -1,10 +1,16 @@
 .autotooltip-wrapper {
   --autotooltip-theme-bg-color--dark: #303133;
-  --autotooltip-theme-bg-color--light: #fff;
   --autotooltip-theme-color--dark: #fff;
+
+  --autotooltip-theme-bg-color--light: #fff;
   --autotooltip-theme-color--light: #303133;
   --autotooltip-theme-border--light: 1px solid #303133;
+
+  --autotooltip-theme-bg-color--dark-light: rgba(0, 0, 0, 0.4);
+  --autotooltip-theme-color--dark-light: #fff;
+
   --autotooltip-theme-z-index: 10240;
+  --autotooltip-theme-border-radius: 4px;
 
   display: none;
   width: max-content;
@@ -13,7 +19,7 @@
   top: 0;
   left: 0;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: var(--autotooltip-theme-border-radius);
   font-size: 12px;
   line-height: 1.2;
 
@@ -28,19 +34,102 @@
     border: var(--autotooltip-theme-border--light);
   }
 
+  &.is-dark-light {
+    background: var(--autotooltip-theme-bg-color--dark-light);
+    color: var(--autotooltip-theme-color--dark-light);
+    padding: 4px 10px;
+    line-height: unset;
+    border-radius: 2px;
+  }
+
   .autotooltip {
     &__arrow {
       position: absolute;
-      width: var(--autotooltip-arrow--width);
-      height: var(--autotooltip-arrow--width);
-      transform: rotate(45deg);
-
-      &.is-dark {
-        background: var(--autotooltip-theme-bg-color--dark);
-      }
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-color: transparent;
 
       &.is-light {
+        width: var(--autotooltip-arrow--width);
+        height: var(--autotooltip-arrow--width);
+        transform: rotate(45deg);
         background: var(--autotooltip-theme-bg-color--light);
+      }
+
+      // 向上三角形
+      &.up {
+        border-width: 0 var(--autotooltip-arrow--width) var(--autotooltip-arrow--width)
+          var(--autotooltip-arrow--width);
+
+        &.is-dark-light {
+          border-bottom-color: var(--autotooltip-theme-bg-color--dark-light);
+        }
+
+        &.is-dark {
+          border-bottom-color: var(--autotooltip-theme-bg-color--dark);
+        }
+
+        &.is-light {
+          border-left: var(--autotooltip-theme-border--light);
+          border-top: var(--autotooltip-theme-border--light);
+        }
+      }
+
+      // 向下三角形
+      &.down {
+        border-width: var(--autotooltip-arrow--width) var(--autotooltip-arrow--width) 0
+          var(--autotooltip-arrow--width);
+
+        &.is-dark-light {
+          border-top-color: var(--autotooltip-theme-bg-color--dark-light);
+        }
+
+        &.is-dark {
+          border-top-color: var(--autotooltip-theme-bg-color--dark);
+        }
+
+        &.is-light {
+          border-bottom: var(--autotooltip-theme-border--light);
+          border-right: var(--autotooltip-theme-border--light);
+        }
+      }
+
+      // 向左三角形
+      &.left {
+        border-width: var(--autotooltip-arrow--width) var(--autotooltip-arrow--width)
+          var(--autotooltip-arrow--width) 0;
+        &.is-dark-light {
+          border-right-color: var(--autotooltip-theme-bg-color--dark-light);
+        }
+
+        &.is-dark {
+          border-right-color: var(--autotooltip-theme-bg-color--dark);
+        }
+
+        &.is-light {
+          border-left: var(--autotooltip-theme-border--light);
+          border-bottom: var(--autotooltip-theme-border--light);
+        }
+      }
+
+      // 向右三角形
+      &.right {
+        border-width: var(--autotooltip-arrow--width) 0 var(--autotooltip-arrow--width)
+          var(--autotooltip-arrow--width);
+
+        &.is-dark-light {
+          border-left-color: var(--autotooltip-theme-bg-color--dark-light);
+        }
+
+        &.is-dark {
+          border-left-color: var(--autotooltip-theme-bg-color--dark);
+        }
+
+        &.is-light {
+          border-top: var(--autotooltip-theme-border--light);
+          border-right: var(--autotooltip-theme-border--light);
+        }
       }
     }
   }
