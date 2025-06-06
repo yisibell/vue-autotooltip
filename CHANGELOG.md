@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v2.2.0
+
+[compare changes](https://github.com/yisibell/vue-autotooltip/compare/v2.1.0...v2.2.0)
+
+### 🚀 Enhancements
+
+- Support config z-index and add hide middleware ([08863bf](https://github.com/yisibell/vue-autotooltip/commit/08863bf))
+
+### 🏡 Chore
+
+- **docs:** Update readme ([9507803](https://github.com/yisibell/vue-autotooltip/commit/9507803))
+
+### ❤️ Contributors
+
+- Elenh ([@yisibell](http://github.com/yisibell))
+- Wenqing <wenqing@kerrylan.com>
+
 ## v2.1.0
 
 [compare changes](https://github.com/yisibell/vue-autotooltip/compare/v2.0.0...v2.1.0)
