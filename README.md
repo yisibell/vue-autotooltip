@@ -89,7 +89,7 @@ Configuration details as belows:
 |  `disabled`  |            `boolean`            |     `false`     |     Whether to disable the tooltip.      |
 |  `duration`  |            `number`             |       `0`       |        Tooltip display duration.         |
 |   `offset`   |       `[number, number]`        |    `[0, 0]`     |               Set offset.                |
-|   `zIndex`   |       `number`        |    `1024`     |               Specify the tooltip's `z-index`.                |
+|   `zIndex`   |            `number`             |     `1024`      |     Specify the tooltip's `z-index`.     |
 
 ## Has not binding value
 

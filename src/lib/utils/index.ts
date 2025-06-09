@@ -1,5 +1,14 @@
 import { css } from 'fourdom'
-import { computePosition, offset, flip, shift, arrow, hide, inline, autoUpdate } from '@floating-ui/dom'
+import {
+  computePosition,
+  offset,
+  flip,
+  shift,
+  arrow,
+  hide,
+  inline,
+  autoUpdate
+} from '@floating-ui/dom'
 import type {
   TooltipBindingValue,
   UpdatePositionFn,
@@ -17,12 +26,17 @@ export const getTargetParent = (options: TooltipOptions) => {
   return targetParent
 }
 
-export const setArrowDirection = (arrowElement: HTMLElement, direction: 'up' | 'down' | 'left' | 'right') => {
+export const setArrowDirection = (
+  arrowElement: HTMLElement,
+  direction: 'up' | 'down' | 'left' | 'right'
+) => {
   const directions = ['up', 'down', 'left', 'roght']
 
-  directions.filter(v => v !== direction).forEach(v => {
-    arrowElement.classList.remove(v)
-  })
+  directions
+    .filter((v) => v !== direction)
+    .forEach((v) => {
+      arrowElement.classList.remove(v)
+    })
 
   arrowElement.classList.add(direction)
 }
@@ -56,11 +70,11 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
 
   const middleware = [
     offset({
-    mainAxis: 10 + offsetX,
-    crossAxis: 0 + offsetY
-    }), 
-    flip(), 
-    shift({ padding: 5 }), 
+      mainAxis: 10 + offsetX,
+      crossAxis: 0 + offsetY
+    }),
+    flip(),
+    shift({ padding: 5 }),
     inline(),
     hide()
   ]
@@ -76,13 +90,10 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
     placement,
     middleware
   }).then(({ x, y, placement, middlewareData }) => {
-
     if (middlewareData.hide) {
       Object.assign(tooltip.style, {
-        visibility: middlewareData.hide.referenceHidden
-          ? 'hidden'
-          : 'visible',
-      });
+        visibility: middlewareData.hide.referenceHidden ? 'hidden' : 'visible'
+      })
     }
 
     Object.assign(tooltip.style, {
@@ -109,7 +120,6 @@ export const updatePosition: UpdatePositionFn = (ref, tooltip, opts) => {
         bottom: 'top',
         left: 'right'
       }[placement.split('-')[0]]
-
 
       if (arrowStaticSide) {
         Object.assign(arrowElement.style, {
@@ -150,7 +160,7 @@ export function hideTooltip(el?: TooltipReferenceElement) {
       el._tooltipEl.style.display = ''
     }
 
-    if(el._cleanup) {
+    if (el._cleanup) {
       el._cleanup()
     }
   }
